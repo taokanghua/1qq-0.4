@@ -40,7 +40,7 @@
 
     <!-- 底部帮助 -->
     <div class="footer">
-      <span>忘记密码</span>
+      <router-link :to="{name:'forget'}" tag="span">忘记密码</router-link>
       <span>|</span>
       <router-link :to="{name:'loginUp'}" tag="span">用户注册</router-link>
     </div>

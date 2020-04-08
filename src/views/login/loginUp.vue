@@ -26,9 +26,7 @@
         </FormItem>
         <FormItem label="密保问题:" prop="question">
             <Select v-model="formValidate.question" placeholder="挑选你的密保问题">
-                <Option value="">New York</Option>
-                <Option value="">London</Option>
-                <Option value="">Sydney</Option>
+                <Option :value="item" v-for="item in questionlist" :key="item">{{item}}</Option>
             </Select>
         </FormItem>
         <FormItem label="密保答案:" prop="answer">
@@ -51,6 +49,7 @@ import loginHeader from '@/components/login/login-header.vue';
 export default {
   data() {
     return {
+      questionlist:[],
       params: {
         icon: "md-log-in",
         iconSize: 52,
@@ -81,6 +80,7 @@ export default {
     loginBack
   },
   methods:{
+      // 验证表单
       checkForm(){
           this.$refs.formValidate.validate(valid => {
               if(valid){
@@ -89,7 +89,15 @@ export default {
                   this.$Message.error('表单验证失败')
               }
           })
+      },
+      // 请求密保问题列表
+      async getQuestionList(){
+          const {data: res} = await this.axios.get('/questions')
+          this.questionlist = res.questionList
       }
+  },
+  created(){
+      this.getQuestionList()
   }
 };
 </script>
