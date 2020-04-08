@@ -1,9 +1,10 @@
 <template>
   <div class="loginIn-container">
-    <div class="logo">
+    <loginHeader :params=params></loginHeader>
+    <!-- <div class="logo">
       <Icon type="logo-snapchat" size="52" class="login-icon" />
       <h1>KK</h1>
-    </div>
+    </div> -->
     <!-- 账号表单 -->
     <div class="login">
       <Form ref="formValidate" :model="formValidate" :rules="ruleValidate">
@@ -41,13 +42,14 @@
     <div class="footer">
       <span>忘记密码</span>
       <span>|</span>
-      <span>用户注册</span>
+      <router-link :to="{name:'loginUp'}" tag="span">用户注册</router-link>
     </div>
 
   </div>
 </template>
 
 <script>
+import loginHeader from '@/components/login/login-header.vue'
 export default {
   data() {
     return {
@@ -61,6 +63,11 @@ export default {
           {required:true, message:'密码不能为空', trigger: 'blur'},
           {type:'string', min:5, max:12, message:'密码长度只能5~12位!', trigger:'blur'}
           ]
+      },
+      params:{
+        icon: 'logo-snapchat',
+        iconSize:52,
+        text:'KK'
       }
     };
   },
@@ -75,6 +82,9 @@ export default {
         }
       })
     }
+  },
+  components:{
+    loginHeader
   }
 };
 </script>
@@ -85,19 +95,19 @@ export default {
   height: 100vh;
   overflow: hidden;
 }
-.logo {
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  margin-top: 20%;
-  .login-icon {
-    color: royalblue;
-  }
-  h1 {
-    line-height: 52px;
-    margin-left: 0.2em;
-  }
-}
+// .logo {
+//   display: flex;
+//   justify-content: center;
+//   align-content: center;
+//   margin-top: 20%;
+//   .login-icon {
+//     color: royalblue;
+//   }
+//   h1 {
+//     line-height: 52px;
+//     margin-left: 0.2em;
+//   }
+// }
 .login {
     margin: 12% 0;
     padding: 0 10%;

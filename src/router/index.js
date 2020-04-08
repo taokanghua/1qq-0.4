@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-const loginIn = () => import('../views/loginIn')
+const loginIn = () => import('../views/login/loginIn')
+const loginUp = () => import('@/views/login/loginUp')
 
 Vue.use(VueRouter)
 
@@ -11,6 +12,9 @@ Vue.use(VueRouter)
     },
     {
       path: '/loginIn', component: loginIn, name: 'loginIn'
+    },
+    {
+      path: '/loginUp', component: loginUp, name: 'loginUp'
     }
 ]
 
