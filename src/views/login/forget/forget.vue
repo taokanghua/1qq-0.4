@@ -3,9 +3,9 @@
       <loginHeaderBack></loginHeaderBack>
       <loginHeader :params=params></loginHeader>
       <div class="forget-form">
-          <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">
+          <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="84">
             <FormItem label="账号:" prop="account">
-                <Input v-model="formValidate.account" placeholder="Enter your name" @on-blur="getques"/>
+                <Input v-model="formValidate.account" placeholder="请输入账号" @on-blur="getques"/>
             </FormItem>  
             <FormItem label="密保问题:" prop="question" v-show="showbox.pwdques">
                 <Input v-model="formValidate.question" placeholder="Enter your e-mail" disabled/>
@@ -14,7 +14,7 @@
                 <Input v-model="formValidate.answer" placeholder="请输入密保答案..." :disabled="showbox.answer" @on-blur="checkans"/>
             </FormItem>
             <FormItem label="新密码:" prop="newpwd" v-show="showbox.newpwd">
-                <Input v-model="formValidate.newpwd" placeholder="Enter your e-mail" />
+                <Input v-model="formValidate.newpwd" placeholder="请输入新密码" />
             </FormItem>
           </Form>
       </div>
@@ -44,6 +44,7 @@ export default {
 
             },
             ruleValidate:{
+                answer:[{required:true, message:'密保答案不能为空', trigger:'blur'}],
                 newpwd:[
                     {required:true, message:'密码不能为空', trigger:'blur'},
                     {type:'string', max:12, min:5, message:'密码长度为5~12', trigger:'blur'}
@@ -75,6 +76,9 @@ export default {
         },
         // 验证用户密保答案
         async checkans(){
+            if(this.formValidate.question == ''){
+                return false
+            }
             let data = {
                 account: this.formValidate.account,
                 answer: this.formValidate.answer

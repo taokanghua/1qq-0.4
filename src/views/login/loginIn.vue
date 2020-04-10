@@ -11,19 +11,21 @@
         <FormItem prop="account">
           <Input
             v-model="formValidate.account"
-            placeholder="Enter your name"
+            placeholder="请输入账号"
             size="large"
+            @on-blur="getavatar"
           />
           <img
             src="http://taokanghua.cn/sources/1584695205266.jpeg"
             alt="用户头像"
             id="avatar"
+            ref="avatar"
           />
         </FormItem>
         <FormItem prop="password">
           <Input
             v-model="formValidate.password"
-            placeholder="Enter your password"
+            placeholder="请输入密码"
             size="large"
             type="password"
           />
@@ -58,7 +60,7 @@ export default {
         password:""
       },
       ruleValidate: {
-        account:[{required:true, type: 'number', message:'账户不能为空', trigger: 'blur'}],
+        // account:[{required:true, type: 'number', message:'账户不能为空', trigger: 'blur'}],
         password:[
           {required:true, message:'密码不能为空', trigger: 'blur'},
           {type:'string', min:5, max:12, message:'密码长度只能5~12位!', trigger:'blur'}
@@ -74,13 +76,35 @@ export default {
   methods:{
     //登录
     getLogin(){
-      this.$refs.formValidate.validate( (valid) => {
+      this.$refs.formValidate.validate( async valid => {
         if(valid){
-          this.$Message.success('表单验证通过')
+          const {data:res} = await this.axios.post('loginin',this.qs.stringify(this.formValidate))
+          if(res.meta.status == 200){
+            //保存token
+            window.localStorage.setItem('kktoken', res.token)
+            this.$router.push({name:'contact'})
+          }else{
+            this.$Message.error(res.content)
+          }
         }else{
           this.$Message.error('表单验证失败')
         }
       })
+    },
+    //获取用户头像
+    async getavatar(){
+      if(this.formValidate.account.length < 5){
+        return false
+      }
+      let data = {
+        account: this.formValidate.account
+      }
+      const {data: res} = await this.axios.post('/question/getavatar', this.qs.stringify(data))
+      if(res.meta.status != 200){
+        return false
+      }else{
+          this.$refs.avatar.src = res.res.img
+      }
     }
   },
   components:{

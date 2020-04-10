@@ -13,13 +13,30 @@ Vue.use(ViewUI)
 import axios from 'axios'
 axios.defaults.baseURL = 'http://localhost:3005'
 Vue.prototype.axios = axios
+
+// 请求拦截器
+axios.interceptors.request.use(config=>{
+  let needLoadList = ['/forget']
+  // console.dir(vm.$route.path)
+  if(needLoadList.includes(vm.$route.path)){
+    //需要加载动画的页面
+    vm.$store.commit('changeStatus')
+  }
+  return config
+})
+//响应拦截器
+axios.interceptors.response.use(config=>{
+  vm.$store.state.loading = false
+  return config
+})
+
 // import qs
 import qs from 'qs'
 Vue.prototype.qs = qs
 
 Vue.config.productionTip = false
 
-new Vue({
+const vm = new Vue({
   router,
   store,
   render: h => h(App)

@@ -5,7 +5,7 @@
     <!-- 注册表单 -->
     <div class="loginin-form">
       <Form
-        ref="formValidate"
+        ref="formValidate1"
         :model="formValidate"
         :rules="ruleValidate"
         :label-width="85"
@@ -68,7 +68,7 @@ export default {
           enpwd:[{required:true, validator:(rule, value, callback)=>{ //自定义验证规则
               if(value =="") return callback(new Error('请输入密码!'))
               else if(value != this.formValidate.pwd) return callback(new Error('两次密码不一致'))
-              callback
+              callback()
           } ,trigger:'blur'}],
           question:[{required:true}],
           answer:[{required:true, message:'请输入密保答案', trigger:'blur'}]
@@ -82,19 +82,36 @@ export default {
   methods:{
       // 验证表单
       checkForm(){
-          this.$refs.formValidate.validate(valid => {
-              if(valid){
-                  this.$Message.success('表单验证通过')
+          this.$refs.formValidate1.validate(async valid => {
+              if(!valid){
+                  this.$Message.success('表单失败')
+                  return false
               }else{
-                  this.$Message.error('表单验证失败')
+                //表单验证通过就发送请求
+                let data = {
+                  password: this.formValidate.pwd,
+                  question: this.formValidate.question,
+                  answer: this.formValidate.answer
+                }
+                const {data:res} = await this.axios.post('/loginup', this.qs.stringify(data))
+                if(res.meta.status != 200){
+                  this.$Message.error('我也不知道哪里出了问题!')
+                }else{
+                  this.$Modal.success({
+                    title: '恭喜,注册成功了!',
+                    content:`<p>你的账号为: ${res.id}</p><p>赶快去登陆吧!</p>`
+                  })
+                  this.$router.push({name:'loginIn'})
+                }
               }
           })
+
       },
       // 请求密保问题列表
       async getQuestionList(){
           const {data: res} = await this.axios.get('/questions')
           this.questionlist = res.questionList
-      }
+      },
   },
   created(){
       this.getQuestionList()
