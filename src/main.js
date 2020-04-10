@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 
 import './styles/common.less'
+import '@/assets/fonts/iconfont.css'
 
 // 导入 iview
 import ViewUI from 'view-design'

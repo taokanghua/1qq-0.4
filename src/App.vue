@@ -24,6 +24,9 @@ export default {
 </script>
 
 <style lang="less">
+.now{
+    color: #3399ff !important;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

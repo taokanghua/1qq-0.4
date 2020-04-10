@@ -6,6 +6,8 @@ const loginUp = () => import('@/views/login/loginUp')
 const forget = () => import('@/views/login/forget/forget')
 
 const contact = () => import('@/views/home/contacts')
+const message = () => import('@/views/home/message')
+const discover = () => import('@/views/home/discover')
 
 Vue.use(VueRouter)
 
@@ -24,11 +26,18 @@ Vue.use(VueRouter)
     },
     {
       path:'/contacts', component: contact, name: 'contact'
+    },
+    {
+      path:'/message', component: message, name: 'message'
+    },
+    {
+      path: '/discover', component: discover, name: 'discover'
     }
 ]
 
 const router = new VueRouter({
-  routes
+  routes,
+  linkActiveClass: "now"
 })
 
 // 全局路由守卫

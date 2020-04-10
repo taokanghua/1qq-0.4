@@ -1,11 +1,10 @@
 <template>
-  <div class="contact-container">
-    <myheader>
-        <i class="iconfont icon-tianjiayonghu"></i>
-    </myheader>
-      <h1>this is contacts page</h1>
+  <div class="discover-container">
+    <myheader><i class="iconfont icon-Settings"></i></myheader>
+    <h1>this is discover page</h1>
     <tabbar></tabbar>
   </div>
+  
 </template>
 
 <script>
@@ -19,15 +18,12 @@ export default {
   components:{
     tabbar,
     myheader
-  },
-  created(){
-    
   }
 }
 </script>
 
 <style lang="less" scoped>
-.contact-container{
+.discover-container{
   width: 100%;
   height: 100vh;
   background-color: #F5F6FA;

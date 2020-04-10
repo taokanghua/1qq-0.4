@@ -82,6 +82,7 @@ export default {
           if(res.meta.status == 200){
             //保存token
             window.localStorage.setItem('kktoken', res.token)
+            this.$store.state.userinfo = res.userinfo
             this.$router.push({name:'contact'})
           }else{
             this.$Message.error(res.content)
