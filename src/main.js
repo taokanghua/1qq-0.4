@@ -2,6 +2,11 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import VueSocketIO from 'vue-socket.io'
+Vue.use(new VueSocketIO({
+  debug: true,
+  connection: 'http://localhost:3005'
+}))
 
 import './styles/common.less'
 import '@/assets/fonts/iconfont.css'
@@ -17,6 +22,7 @@ Vue.prototype.axios = axios
 
 // 请求拦截器
 axios.interceptors.request.use(config=>{
+  config.headers.Authorization = localStorage.getItem('kktoken')
   let needLoadList = ['/forget']
   // console.dir(vm.$route.path)
   if(needLoadList.includes(vm.$route.path)){

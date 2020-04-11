@@ -149,13 +149,11 @@ export default {
 .login-btn{
   display: flex;
   justify-content: center;
+  color: white;
   .btn{
     border-radius: 50%;
     background-color: #0F7FEF;
     padding: 16px 16px;
-    .login-btn{
-        color: white;
-    }
   }
 }
 .footer{

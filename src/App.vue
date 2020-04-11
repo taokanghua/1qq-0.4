@@ -39,6 +39,7 @@ export default {
   height: 100vh;
   margin: auto;
   overflow: hidden;
+  position: relative;
 }
 .loading{
   background-color: #fff;

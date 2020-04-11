@@ -4,11 +4,11 @@
     <myheader><i class="iconfont icon-i-add"></i></myheader>
 
     <!-- 聊天item     -->
-    <div class="chat-item">
+    <div class="chat-item" @click="letChat">
       <img src="http://taokanghua.cn/sources/avatar/20.jpg" alt="">
       <div class="chat-info">
         <div class="chat-head">
-          <h4>it交流群</h4>
+          <h4 id="10003" ref="name">it交流群</h4>
           <span>下午10:39</span>
         </div>
         <div class="content-msg">
@@ -31,7 +31,12 @@ export default {
   data(){
     return{}
   },
-  methods:{},
+  methods:{
+    letChat(){
+      let id = this.$refs.name.id
+      this.$router.push({name:'charpage', params:{id}})
+    }
+  },
   components:{
     tabbar,
     myheader

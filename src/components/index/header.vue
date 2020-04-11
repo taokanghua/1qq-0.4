@@ -1,9 +1,13 @@
 <template>
   <div class="header">
       <div class="header-avatar">
-          <img :src="img" alt="">
+          <slot name="left">
+                <router-link :src="img" alt="" :to="{name:'setmyself'}" tag="img"/> 
+          </slot>
       </div>
-      <div class="header-title">{{title}}</div>
+      <div class="header-title">
+          <slot name="title">{{title}}</slot>
+      </div>
       <div class="header-icon">
           <slot></slot>
       </div>
@@ -54,6 +58,9 @@ export default {
             width: 45px;
             height: 45px;
             border-radius: 50%;
+        }
+        i{
+            color: #fff;
         }
     }
     .header-title{

@@ -32,7 +32,7 @@ export default {};
     width: 100%;
     background-color: #F9F9F9;
     padding-top: 5px;
-    position: fixed;
+    position: absolute;
     left: 0;
     bottom: 0;
 

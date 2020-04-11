@@ -1,7 +1,7 @@
 <template>
   <div class="contact-container">
     <myheader>
-        <i class="iconfont icon-tianjiayonghu"></i>
+        <router-link :to="{name:'addfriend'}" tag="i" class="iconfont icon-tianjiayonghu"></router-link>
     </myheader>
       <h1>this is contacts page</h1>
     <tabbar></tabbar>
