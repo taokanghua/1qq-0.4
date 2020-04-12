@@ -76,6 +76,27 @@
       "unicode_decimal": 59739
     },
     {
+      "icon_id": "2799963",
+      "name": "birthday",
+      "font_class": "birthday",
+      "unicode": "e771",
+      "unicode_decimal": 59249
+    },
+    {
+      "icon_id": "3716623",
+      "name": "空间",
+      "font_class": "kongjian",
+      "unicode": "e68b",
+      "unicode_decimal": 59019
+    },
+    {
+      "icon_id": "4434499",
+      "name": "等级",
+      "font_class": "dengji",
+      "unicode": "e69f",
+      "unicode_decimal": 59039
+    },
+    {
       "icon_id": "7447914",
       "name": "voice",
       "font_class": "voice",
@@ -95,6 +116,13 @@
       "font_class": "zhaoxiangji",
       "unicode": "e689",
       "unicode_decimal": 59017
+    },
+    {
+      "icon_id": "9060299",
+      "name": "edit",
+      "font_class": "edit_small",
+      "unicode": "e507",
+      "unicode_decimal": 58631
     },
     {
       "icon_id": "9159972",

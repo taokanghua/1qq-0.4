@@ -23,7 +23,7 @@ Vue.prototype.axios = axios
 // 请求拦截器
 axios.interceptors.request.use(config=>{
   config.headers.Authorization = localStorage.getItem('kktoken')
-  let needLoadList = ['/forget']
+  let needLoadList = ['/forget', '/searchresult']
   // console.dir(vm.$route.path)
   if(needLoadList.includes(vm.$route.path)){
     //需要加载动画的页面

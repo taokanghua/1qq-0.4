@@ -13,11 +13,13 @@
       </myheader>
       <!-- 搜索框 -->
       <div class="search-box">
-          <input type="search" class="add-search" placeholder="输入kk号查找好友....">
+          <input v-model="idipt" type="search" class="add-search" placeholder="输入kk号查找好友...." @focus="idserach" @blur="recove" @input="idsear">
           <Icon type="ios-search" class="search-icon" size="24"></Icon>
       </div>
+      <!-- 搜索出来的用户 -->
+      <div v-show="idsearch"><findfrd :item="idserres"></findfrd></div>
     <!-- 搜索菜单栏 -->
-    <div class="search-menu">
+    <div class="search-menu" v-show="isstutes">
         <div class="menu-item" v-for="item in menulist" :key="item.text">
             <div class="menu-left">
                 <span :class="item.icon+' iconfont'"></span>
@@ -30,17 +32,18 @@
     </div>
 
     <!-- 特殊栏 -->
-    <div class="all">
+    <router-link :to="{name:'searchresult'}" class="all" tag="div" v-show="isstutes">
         <Icon type="ios-heart" size="20" color="red"></Icon>
         <span>当前所有已注册用户</span>
         <Icon type="ios-arrow-forward" class="menu-icon" size="20" color="#979FB4"></Icon>
-    </div>
+    </router-link>
       
   </div>
 </template>
 
 <script>
 import myheader from '@/components/index/header.vue'
+import findfrd from '@/components/other/findfrditem.vue'
 export default {
 data(){
     return{
@@ -51,11 +54,43 @@ data(){
             {icon: 'icon-serch', text: '按条件查找', link: 'conditionf'},
             {icon: 'icon-message', text: 'kk扩列', link: 'kuolie'},   
             {icon: 'icon-iconmorendizhi', text:'查看附近的人', link: 'nearf'}
-        ]
+        ],
+        isstutes:true, //ipt获取焦点 页面其他隐藏
+        idsearch:false, // id搜出来内容的控制显示和隐藏
+        idipt:'',  //id搜索框
+        idserres:'' //id查找出来的数据
     }
 },
 components:{
-    myheader
+    myheader,
+    findfrd
+},
+methods:{
+    //获得焦点
+    idserach(){
+        this.isstutes = false
+    },
+    //失去焦点
+    recove(){
+        // this.idsearch = false
+        this.isstutes = true      
+    },
+    async idsear(){
+        if(this.idipt.length < 5){
+            return false
+        }else{
+            const {data: res} = await this.axios.get('/checkuser/'+this.idipt)
+            if(res.meta.status != 200){
+                this.$Message.error(res.content)
+            }else{
+                this.idserres = res.res
+                this.idsearch = true
+            }
+        }
+    }
+},
+created(){
+    this.idsear()
 }
 }
 </script>

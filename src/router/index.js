@@ -12,6 +12,9 @@ const discover = () => import('@/views/home/discover')
 const charpage = () => import('@/components/chat/chatPage')
 const addfriend = () => import('@/views/home/contact-com/addfriend')
 const setmyself = () => import('@/views/home/contact-com/setmyself')
+const searchresult = () => import('@/views/home/contact-com/searchresult')
+const persondetail = () => import('@/views/home/contact-com/persondetail')
+const applyaddfrd = () => import('@/views/home/contact-com/applyaddfrd')
 
 Vue.use(VueRouter)
 
@@ -45,6 +48,15 @@ Vue.use(VueRouter)
     },
     {
       path: '/updateinfo', component: setmyself, name:'setmyself'
+    },
+    {
+      path: '/searchresult', component: searchresult, name:'searchresult'
+    },
+    {
+      path:'/persondetail/:id', component:persondetail, name:'persondetail'
+    },
+    {
+      path:'/applyaddfrd/:id', component:applyaddfrd, name:'applyaddfrd'
     }
 ]
 
