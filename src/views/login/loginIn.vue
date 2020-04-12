@@ -16,7 +16,7 @@
             @on-blur="getavatar"
           />
           <img
-            src="http://taokanghua.cn/sources/1584695205266.jpeg"
+            src="https://www.keaidian.com/uploads/allimg/190514/14161918_4.jpg"
             alt="用户头像"
             id="avatar"
             ref="avatar"
