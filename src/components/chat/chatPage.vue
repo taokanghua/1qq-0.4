@@ -138,7 +138,7 @@ export default {
         width: 0;
         height: 0;
         border-top: 6px solid transparent;
-        border-right: 12px solid #1FBAFC;
+        border-right: 6px solid #1FBAFC;
         border-bottom: 6px solid transparent;
         border-left: 0 solid transparent;
         position: absolute;
@@ -170,7 +170,7 @@ export default {
           border-top: 6px solid transparent;
           border-right: 0px solid transparent;
           border-bottom: 6px solid transparent;
-          border-left: 12px solid #1FBAFC;
+          border-left: 6px solid #1FBAFC;
           position: absolute;
           right: 0;
           top: 5px;
