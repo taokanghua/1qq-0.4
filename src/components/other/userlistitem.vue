@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="{name:'charpage',params:{id:info.nickname}}" class="findfrd-container" tag="div">
+  <router-link :to="{name:'charpage',params:{id:info.id}}" class="findfrd-container" tag="div">
       <img :src="info.img" alt="">
       <div class="findfrd-info">
           <h4>{{info.nickname}} <Icon type="ios-female" v-if="info.gender!='男'" color="pink"></Icon><Icon v-else type="ios-male" color="blue"></Icon></h4>

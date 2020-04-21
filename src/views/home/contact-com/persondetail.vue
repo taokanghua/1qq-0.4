@@ -84,10 +84,12 @@ export default {
         if(curid == useid){
             this.checkbtn = false
         }
+        //检测已经是不是好友
+        if(this.$store.state.userinfo.personlist.friends.includes(this.id)) this.checkbtn = false
     },
     //跳转到申请好友页面
     gotoapply(){
-      this.$router.push({name:'applyaddfrd', params:{id:this.id}})
+      this.$router.push({name:'applyaddfrd', params:{id:this.id}}) 
     }
   },
   components: {

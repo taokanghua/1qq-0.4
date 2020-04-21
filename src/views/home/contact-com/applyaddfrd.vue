@@ -23,7 +23,7 @@
         <p>填写验证信息</p>
        <textarea rows="4" class="textar" v-model="textarea"></textarea>
     </div>
-    <i-button type="success" long class="apply-btn">立即发送</i-button>
+    <i-button type="success" long class="apply-btn" @click="addfriend">立即发送</i-button>
   </div>
 </template>
 
@@ -34,7 +34,7 @@ export default {
     return {
         id: this.$route.params.id,
         info:'',
-        textarea:''
+        textarea:'暂时设计点击就能成功加好友....'
     };
   },
   components: {
@@ -48,6 +48,16 @@ export default {
           if(res.meta.status != 200){
               this.$Message.error('获取页面失败！')
           }
+      },
+      addfriend(){
+        this.$store.state.userinfo.personlist.friends.push(this.$route.params.id)
+        let data ={
+          target: this.$route.params.id,
+          my: this.$store.state.userinfo.id
+        }
+        this.$socket.emit('addfriend', data)
+        this.$Message.success('添加好友成功！')
+        this.$router.push({name:'contact'})
       }
   },
   created(){

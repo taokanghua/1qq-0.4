@@ -2,7 +2,7 @@
   <div class="tabbar-container">
     <div class="tabbar">
       <router-link :to="{name:'message'}" tag="div" class="tabbar-item">
-        <Badge :count="10">
+        <Badge :dot='$store.state.havemsg'>
             <Icon type="ios-chatboxes"></Icon>
         </Badge>
         <p>消息</p>
@@ -20,7 +20,21 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data(){
+    return{
+
+    }
+  },
+  watch:{
+    '$store.state.havemsg'(n){
+      return n
+    }
+  },
+  methods:{
+
+  }
+};
 </script>
 
 <style lang="less" scoped>

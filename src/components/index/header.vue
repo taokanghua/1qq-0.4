@@ -6,6 +6,7 @@
           </slot>
       </div>
       <div class="header-title">
+          {{nickname?nickname.nickname:''}}
           <slot name="title">{{title}}</slot>
       </div>
       <div class="header-icon">
@@ -34,7 +35,8 @@ export default {
                 this.title = '发现'
         }
 
-  }
+  },
+  props:['nickname']
 }
 </script>
 

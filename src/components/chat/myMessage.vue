@@ -1,13 +1,13 @@
 <template>
   <div class="he-chat-item my-chat-item">
           <div class="content-box">
-            <p>西门吹大雪</p>
+            <p v-if="data.name">{{data.name}}</p>
             <div class="he-chat-i-content my-chat-i-content">
-              你好鸭，我是xxx 很高兴认识你
+              {{data.cont}}
             </div>
           </div>
           
-          <img src="http://taokanghua.cn/sources/avatar/5.jpg" alt="">
+          <img :src="data.img" alt="">
     </div>
 </template>
 

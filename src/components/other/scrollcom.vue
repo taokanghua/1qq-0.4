@@ -1,7 +1,7 @@
 <template>
   <div class="scrollcom-container" ref="scrollfa" v-if="isshow" @click="isshow=!isshow">
     <div class="scrollcom-content">
-      <slot></slot>
+      <slot>{{notify}}</slot>
     </div>
   </div>
 </template>
@@ -11,8 +11,9 @@ export default {
   data() {
     return {
         isshow: true
-    };
+    }
   },
+  props:['notify'],
   mounted() {
     let fa = this.$refs.scrollfa;
     let son = fa.children[0];
