@@ -18,16 +18,19 @@
 export default {
     data(){
         return{
-
+          
         }
     },
     props:['item'],
     methods:{
     letChat(id){
+      let sessCount = this.item.cont.length
+      this.$store.state.count -= sessCount
       // let id = this.$refs.name
       this.$router.push({name:'charpage', params:{id}})
       // console.log(id)
       this.item.cont = []
+      // this.$store.commit('getcount') //执行这个 重新计算count
     }
     },
     filters:{

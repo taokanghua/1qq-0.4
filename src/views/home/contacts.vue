@@ -60,7 +60,9 @@ export default {
       const { data: res } = await this.axios("/getsysnotify");
       this.notify = res.res;
       // console.log(this.notify.notify.title);
-      this.winnotify(this.notify.notify.title, this.notify.notify.desc)
+      if(this.notify.notify.title != ''){
+        this.winnotify(this.notify.notify.title, this.notify.notify.desc)
+      }
     },
     winnotify(title, content) {
       if(!this.notify) return
@@ -83,6 +85,16 @@ export default {
     this.senduserinfo();
     if (!this.notify) {
       this.getnotiy();
+    }
+    this.axios('/goonline/'+this.$store.state.userinfo.id) //更新用户状态
+    //从服务器获取会话
+    // to do  
+    // 完成上传会话 现在要上传聊天记录 但是现在连不上数据库
+    if(this.$store.state.userinfo){
+      if(this.$store.state.showTag){
+      this.$store.state.session = this.$store.state.userinfo.personlist.chat
+      this.$store.state.showTag = false;
+      console.log(this.$store.state.session)}
     }
   },
 };

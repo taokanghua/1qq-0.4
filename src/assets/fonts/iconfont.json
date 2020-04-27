@@ -83,6 +83,13 @@
       "unicode_decimal": 59249
     },
     {
+      "icon_id": "3177008",
+      "name": "点赞",
+      "font_class": "dianzan_active",
+      "unicode": "e501",
+      "unicode_decimal": 58625
+    },
+    {
       "icon_id": "3716623",
       "name": "空间",
       "font_class": "kongjian",
@@ -95,6 +102,27 @@
       "font_class": "dengji",
       "unicode": "e69f",
       "unicode_decimal": 59039
+    },
+    {
+      "icon_id": "5528580",
+      "name": "share",
+      "font_class": "share",
+      "unicode": "e50a",
+      "unicode_decimal": 58634
+    },
+    {
+      "icon_id": "6444852",
+      "name": "message",
+      "font_class": "message1",
+      "unicode": "e61c",
+      "unicode_decimal": 58908
+    },
+    {
+      "icon_id": "6882647",
+      "name": "点赞",
+      "font_class": "dianzan-ash",
+      "unicode": "e502",
+      "unicode_decimal": 58626
     },
     {
       "icon_id": "7447914",

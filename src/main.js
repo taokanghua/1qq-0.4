@@ -5,7 +5,7 @@ import store from './store'
 import VueSocketIO from 'vue-socket.io'
 Vue.use(new VueSocketIO({
   debug: true,
-  connection: 'http://localhost:3000'
+  connection: 'http://localhost:3002'
 }))
 
 import './styles/common.less'
@@ -15,11 +15,18 @@ import '@/assets/fonts/iconfont.css'
 import ViewUI from 'view-design'
 import 'view-design/dist/styles/iview.css'
 Vue.use(ViewUI)
-
+// 导入懒加载
+import VueLazyload from 'vue-lazyload'
+Vue.use(VueLazyload, {
+  error: require('@/assets/error.png'),
+  loading:require('@/assets/imgloading.gif'),
+  preLoad:1.3,
+  attempt:1
+})
 
 //导入axios
 import axios from 'axios'
-axios.defaults.baseURL = 'http://localhost:3000'
+axios.defaults.baseURL = 'http://localhost:3002'
 Vue.prototype.axios = axios
 
 // 请求拦截器
@@ -43,15 +50,19 @@ axios.interceptors.response.use(config=>{
 import qs from 'qs'
 Vue.prototype.qs = qs
 
+// 导入mixin
+import mixin from './mixin'
+
 Vue.config.productionTip = false
 
 const vm = new Vue({
   data:{
     // session:[] //存储会话 {id, img, nickname}
   },
+  mixins:[mixin],
   sockets:{
     connect:function(){
-      console.log('connection')
+     console.log('connected')
     },
     inviteone(data){ //监听别人发过来的邀请 并加入房间
       if(data.includes(this.$store.state.userinfo.id)){
@@ -76,6 +87,13 @@ const vm = new Vue({
       })
 
       if(ishave) this.$store.state.session.push(data)
+      //设置tabbar的消息数量
+      let count = 0
+      this.$store.state.session.forEach(item=>{
+        console.log(item.cont)
+        count += item.cont.length
+        this.$store.state.count = count
+      })
 
       // 添加好友的
       if(this.$store.state.roomcontent[data.room]){
@@ -83,6 +101,7 @@ const vm = new Vue({
       }
       // this.$store.state.havemsg = true
       // console.log(this.$store.state.session)
+
       
     },
     chatroom(data){ //更新聊天列表数据
@@ -94,6 +113,17 @@ const vm = new Vue({
       if(data.target == this.$store.state.userinfo.id){
         
         this.$store.state.userinfo.personlist.friends.push(data.my)
+        let data = {
+          id: this.$store.state.userinfo.id,
+          list: data.target
+        }
+       
+      }
+    },
+    disconnect(){
+      console.log('socket已断开连接')
+      if(this.$store.sate.userinfo){
+        this.$socket.emit('discon', this.$store.sate.userinfo.id)
       }
     }
   },

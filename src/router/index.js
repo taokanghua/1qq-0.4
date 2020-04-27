@@ -15,6 +15,7 @@ const setmyself = () => import('@/views/home/contact-com/setmyself')
 const searchresult = () => import('@/views/home/contact-com/searchresult')
 const persondetail = () => import('@/views/home/contact-com/persondetail')
 const applyaddfrd = () => import('@/views/home/contact-com/applyaddfrd')
+const editdiscover = () => import('@/views/home/discover-com/editdiscover')
 
 Vue.use(VueRouter)
 
@@ -57,6 +58,9 @@ Vue.use(VueRouter)
     },
     {
       path:'/applyaddfrd/:id', component:applyaddfrd, name:'applyaddfrd'
+    },
+    {
+      path: '/editdiscover', component:editdiscover, name:'editdiscover'
     }
 ]
 

@@ -9,13 +9,14 @@ export default new Vuex.Store({
     userinfo:null, //用户信息
     session:[], //会话
     roomcontent:null, //所有房间的聊天记录
-    havemsg: false,
+    count:0, //会话数量
     showTag: true // 首页系统通告
   },
   mutations: {
     changeStatus(state){
       state.loading = !state.loading
-    }
+    },
+
   },
   actions: {
   },

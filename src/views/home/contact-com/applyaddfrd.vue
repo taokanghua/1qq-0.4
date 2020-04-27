@@ -58,7 +58,22 @@ export default {
         this.$socket.emit('addfriend', data)
         this.$Message.success('添加好友成功！')
         this.$router.push({name:'contact'})
+        console.log(data)
+        let data1 = {
+          id: data.my,
+          list: data.target
+        }
+        
+        let data2 = {
+          id:data.target,
+          list:data.my
+        }
+        
+        // console.log(data1, data2)
+        this.axios.post('/updatefriend', this.qs.stringify(data1))
+        this.axios.post('/updatefriend', this.qs.stringify(data2))
       }
+      
   },
   created(){
       this.getinfo()

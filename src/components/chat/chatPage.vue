@@ -110,6 +110,7 @@ export default {
       };
       data.cont.push(this.iptcon);
       this.$socket.emit("sendmsg", data);
+      this.iptcon = ''
     },
     renderMsg(data, ani='true') {
       if (data.id == this.$store.state.userinfo.id) {
@@ -153,7 +154,7 @@ export default {
         })
       }
     },
-
+    
   },
   components: {
     myheader,
