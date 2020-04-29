@@ -4,8 +4,8 @@ import router from './router'
 import store from './store'
 import VueSocketIO from 'vue-socket.io'
 Vue.use(new VueSocketIO({
-  debug: true,
-  connection: 'http://localhost:3002'
+  debug: false,
+  connection: 'http://taokanghua.cn:3002'
 }))
 
 import './styles/common.less'
@@ -26,13 +26,13 @@ Vue.use(VueLazyload, {
 
 //导入axios
 import axios from 'axios'
-axios.defaults.baseURL = 'http://localhost:3002'
+axios.defaults.baseURL = 'http://taokanghua.cn:3002'
 Vue.prototype.axios = axios
 
 // 请求拦截器
 axios.interceptors.request.use(config=>{
   config.headers.Authorization = localStorage.getItem('kktoken')
-  let needLoadList = ['/forget', '/searchresult']
+  let needLoadList = ['/forget', '/searchresult','/discover']
   // console.dir(vm.$route.path)
   if(needLoadList.includes(vm.$route.path)){
     //需要加载动画的页面

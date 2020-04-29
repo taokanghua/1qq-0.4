@@ -56,8 +56,8 @@ export default {
   data() {
     return {
       formValidate: {
-        account: "10001",
-        password:"12345"
+        account: "",
+        password:""
       },
       ruleValidate: {
         // account:[{required:true, type: 'number', message:'账户不能为空', trigger: 'blur'}],
