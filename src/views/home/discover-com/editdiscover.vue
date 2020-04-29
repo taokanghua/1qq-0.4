@@ -35,15 +35,13 @@ export default {
         uniq: this.$store.state.userinfo.id+Date.now(),
         id: this.$store.state.userinfo.id,
         name: this.$store.state.userinfo.nickname,
+        avatar:this.$store.state.userinfo.img,
         time: new Date(),
         content:'',
         personal:'',
-        show:true, //删除了就修改这个值
         imgs:this.imglist, // 选择的图片列表
         local:'',  //地名
-        looknum:'', // 浏览次数
-        comment:[], 
-        goods:[]  //点赞列表
+        ip:''
       }
     }
   },
@@ -61,11 +59,19 @@ export default {
       this.imglist.push(res.path)
       this.dynamic.imgs = this.imglist
     },
-    publishDynamic(){
-      console.log(this.dynamic)
+    async publishDynamic(){
+      let {data:res} = await this.axios.post('/postdynamic', this.qs.stringify(this.dynamic))
+      // console.log(res)
+      if(res.meta.status == 200){
+        this.$Message.success('发表动态成功!')
+        this.$router.push({name:'discover'})
+      }else{
+        this.$Message.error('发表失败了!')
+      }
     },
     async getlocal(){
       let ip = {ip:returnCitySN["cip"]}
+      this.dynamic.ip = {ip:returnCitySN["cip"]}.ip
       // console.log(ip)
       let {data:res} = await this.axios.post('/getlocal/', this.qs.stringify(ip))
       if(res.status != 0){
@@ -78,7 +84,6 @@ export default {
   },
   created(){
     this.getlocal()
-    
   }
 };
 </script>

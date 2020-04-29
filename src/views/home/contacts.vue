@@ -94,7 +94,7 @@ export default {
       if(this.$store.state.showTag){
       this.$store.state.session = this.$store.state.userinfo.personlist.chat
       this.$store.state.showTag = false;
-      console.log(this.$store.state.session)}
+      }
     }
   },
 };

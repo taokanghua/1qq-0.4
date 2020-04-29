@@ -49,6 +49,15 @@ axios.interceptors.response.use(config=>{
 // import qs
 import qs from 'qs'
 Vue.prototype.qs = qs
+// 导入图片预览组件
+import Viewer from 'v-viewer'
+import 'viewerjs/dist/viewer.css'
+Vue.use(Viewer)
+Viewer.setDefaults({
+  Options:{
+    
+  }
+})
 
 // 导入mixin
 import mixin from './mixin'

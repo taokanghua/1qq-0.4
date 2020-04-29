@@ -9,52 +9,12 @@
         </p>
       </div>
       <div class="info">
-        <img src="http://taokanghua.cn/sources/avatar/21.jpg" alt="">
+        <img :src="$store.state.userinfo.img" alt="">
       </div>
     </div>
     <div class="dicover-con">
-      <div class="discover-item" >
-        <div class="dis-header">
-          <div class="dis-left">
-            <img src="http://taokanghua.cn/sources/avatar/11.jpg" alt="">
-            <div class="dis-info">
-              <h4>帅帅兔</h4>
-              <div class="time">
-                今天08:40
-                <span>可有可无的</span>
-              </div>
-            </div>
-          </div>
-          <Icon type="ios-more" class="more"></Icon>
-        </div>
-        <!-- 用户内容栏 -->
-        <div class="dis-content">
-          关关雎鸠，在河之洲。窈窕淑玉，君子好逑。
-          <div class="img-box">
-              <img v-lazy="'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=675663775,1168515943&fm=26&gp=0.jpg'" alt="">
-
-          </div>
-        <p class="device">手机用户</p>
-        </div>
-        <!-- 底部点赞 评论栏 -->
-        <div class="dis-tools">
-          <div class="dis-scan">浏览4次</div>
-          <div class="tool">
-            <span class="iconfont icon-dianzan_active"></span>
-            <span class="iconfont icon-message1"></span>
-            <span class="iconfont icon-share"></span>
-          </div>
-        </div>
-        <!-- 评论和点赞列表栏 -->
-        <div class="dis-commont">
-          <div class="goodbox">
-            <span class="iconfont icon-dianzan_active"></span>
-            拿做吉他唱歌
-          </div>
-          <input type="text" placeholder="评论">
-        </div>
-      </div> <!--discover-item  end-->
-      
+      <dynamicitem v-for="item in dynamic" :key="item._id" :item="item"></dynamicitem>
+      <!--discover-item  end-->
     </div>
 
     <tabbar></tabbar>
@@ -64,22 +24,31 @@
 
 <script>
 import tabbar from '@/components/index/tabBar.vue'
+import dynamicitem from '@/components/other/dynamicitem.vue'
 export default {
   data(){
     return{
+      dynamic: []
     }
   },
-  methods:{},
+  methods:{
+    async getdynamics(){
+      let {data:res} = await this.axios.get('getdynamic')
+      this.dynamic = res.dynamic.reverse()
+    }
+  },
   components:{
-    tabbar
+    tabbar,
+    dynamicitem
   },
   created(){
-    console.log()
+    // 获取动态
+    this.getdynamics()
   }
 }
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 .discover-container{
   width: 100%;
   max-height: 100%;
@@ -150,6 +119,7 @@ export default {
             font-size: 12px;
             span{
               margin-left: 8px;
+              color: #43BC85;
             }
           }
         }
@@ -162,17 +132,33 @@ export default {
     .dis-content{
       margin-top: 16px;
       font-weight: 600;
+      .content{
+        width: 100px;
+
+      }
       .img-box{
         width: 100%;
         height: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-content: space-between;
+        &:after{
+          content: '';
+          width: 32%;
+        }
         img{
-          max-width: 100%;
+          width: 32%;
+          height: 120px;
+          margin-top: 5px;
         }
       }
       
       .device{
+        margin-top: 6px;
         font-size: 12px;
         font-weight: bold;
+        color: #FF4302;
       }
     }
     .dis-tools{
@@ -197,8 +183,9 @@ export default {
       .goodbox{
         color: #3E6185;
         span{
-          font-size: 20px;
+          font-size: 13px;
           color: skyblue;
+          border-bottom: 1px solid #F4F5F9;
         }
       }
       input{
@@ -212,4 +199,11 @@ export default {
     }
   }
 }
+.sing-img{
+          img{
+            width: 100% !important;
+            height: 100% !important;
+          }
+          
+        }
 </style>

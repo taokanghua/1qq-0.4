@@ -98,7 +98,7 @@ export default {
       let roomId = min + max;
       this.room = roomId
       // let roomId = Math.min(...list) + Math.Max(...list).toString()
-      // // console.log(roomId)
+      console.log(roomId)
       this.$socket.emit("inviteRoom", roomId);
     },
     sendmsg() {

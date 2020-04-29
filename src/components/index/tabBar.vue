@@ -2,7 +2,7 @@
   <div class="tabbar-container">
     <div class="tabbar">
       <router-link :to="{name:'message'}" tag="div" class="tabbar-item">
-        <Badge :count="$store.state.count">
+        <Badge :count="$store.state.count>0?$store.state.count:0">
             <Icon type="ios-chatboxes"></Icon>
         </Badge>
         <p>消息</p>
