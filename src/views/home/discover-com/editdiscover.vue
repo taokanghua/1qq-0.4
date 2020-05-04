@@ -72,12 +72,14 @@ export default {
     async getlocal(){
       let ip = {ip:returnCitySN["cip"]}
       this.dynamic.ip = {ip:returnCitySN["cip"]}.ip
+      // alert(this.dynamic.ip)
       // console.log(ip)
       let {data:res} = await this.axios.post('/getlocal/', this.qs.stringify(ip))
-      if(res.status != 0){
+      if(!res.content.address_detail.city){
         this.dynamic.local = '定位获取失败!'
       }else{
         this.dynamic.local = res.content.address_detail.city
+        // this.dynamic.content = res.content.address_detail.city
       }
       
     }

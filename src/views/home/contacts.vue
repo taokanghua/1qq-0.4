@@ -60,12 +60,13 @@ export default {
       const { data: res } = await this.axios("/getsysnotify");
       this.notify = res.res;
       // console.log(this.notify.notify.title);
-      if(this.notify.notify.title != ''){
+      if(this.notify.notify.title.length>0){
         this.winnotify(this.notify.notify.title, this.notify.notify.desc)
       }
     },
     winnotify(title, content) {
       if(!this.notify) return
+      // console.log(this.$store.state.showTag)
       if (this.$store.state.showTag) {
         this.$Notice.open({
           title: title,
@@ -93,7 +94,7 @@ export default {
     if(this.$store.state.userinfo){
       if(this.$store.state.showTag){
       this.$store.state.session = this.$store.state.userinfo.personlist.chat
-      this.$store.state.showTag = false;
+      // this.$store.state.showTag = false;
       }
     }
   },

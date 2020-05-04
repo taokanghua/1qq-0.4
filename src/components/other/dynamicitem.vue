@@ -120,6 +120,7 @@ export default {
         this.$Message.success('评论成功！')
         this.item.comment.push(data)
       }
+      this.comment = ''
     }
   },
   created() {
